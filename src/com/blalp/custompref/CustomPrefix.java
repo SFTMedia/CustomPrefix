@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -30,7 +29,7 @@ public class CustomPrefix extends JavaPlugin {
 				if(getConfig().getInt("players.time."+((Player)sender).getUniqueId())+getConfig().getInt("delayDays")<=getCustomDate()){
 					//PrefixRequest prefixRequest = new PrefixRequest();
 					//prefixRequest.setPlayername(sender.getName());
-					//prefixRequest.setRequestedPrefix(StringUtils.join(args," "));
+					//prefixRequest.setRequestedPrefix(join(args," "));
 					List<String> players = (List<String>) getConfig().getList("playerList");
 					if(players==null){
 						players = new ArrayList<String>();
@@ -39,11 +38,11 @@ public class CustomPrefix extends JavaPlugin {
 						players.add(((Player)sender).getUniqueId().toString());
 						getConfig().set("playerList", players);
 					}
-					getConfig().set("players."+((Player)sender).getUniqueId()+".requestedPrefix", StringUtils.join(args," "));
+					getConfig().set("players."+((Player)sender).getUniqueId()+".requestedPrefix", join(args));
 					getConfig().set("players."+((Player)sender).getUniqueId()+".status", "pending");
 					saveConfig();
-					sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] "+"You requested the prefix '"+handleColors(StringUtils.join(args," "))+ChatColor.WHITE+"' Please hold on while our staff screen this prefix.");
-					Bukkit.broadcast(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] "+sender.getName()+" requested "+handleColors(StringUtils.join(args," "))+sender.getName()+ChatColor.WHITE+". do /prefixpending [accept/reject] "+sender.getName()+" [reason]", "customprefix.admin");
+					sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] "+"You requested the prefix '"+handleColors(join(args))+ChatColor.WHITE+"' Please hold on while our staff screen this prefix.");
+					Bukkit.broadcast(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] "+sender.getName()+" requested "+handleColors(join(args))+sender.getName()+ChatColor.WHITE+". do /prefixpending [accept/reject] "+sender.getName()+" [reason]", "customprefix.admin");
 				} else {
 					sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] "+"Please wait "+(getConfig().getInt("players.time."+((Player)sender).getUniqueId())+getConfig().getInt("delayDays")-getCustomDate())+" days before you can request another prefix.");
 				}
@@ -77,9 +76,9 @@ public class CustomPrefix extends JavaPlugin {
 									for(int ii=2;ii<args.length;ii++){
 										newArgs[ii-2]=args[ii];
 									}
-									getConfig().set("players."+players.get(i)+".reason", StringUtils.join(newArgs, " "));
+									getConfig().set("players."+players.get(i)+".reason", join(newArgs));
 									getConfig().set("players."+players.get(i)+".status", "accepted");
-									//prefixRequest.setDeniedReason(StringUtils.join(newArgs, " "));
+									//prefixRequest.setDeniedReason(join(newArgs));
 									//prefixRequest.setRequestedPrefix(pending.get(i).getReqskyuestedPrefix());
 									//pending.remove(i);
 									//getConfig().set("pending", pending);
@@ -89,7 +88,7 @@ public class CustomPrefix extends JavaPlugin {
 									sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] You accepted "+args[1]+"'s Request ("+handleColors(getConfig().getString("players."+players.get(i)+".requestedPrefix"))+ChatColor.WHITE+")"+((getConfig().getString("players."+players.get(i)+".reason").equals(""))?"":" because "+getConfig().getString("players."+players.get(i)+".reason")+"!"));
 									if(Bukkit.getPlayer(args[1])!=null){
 										PermissionsEx.getUser(Bukkit.getPlayer(args[1])).setPrefix(getConfig().getString("players."+players.get(i)+".requestedPrefix"), "*");;
-										Bukkit.getPlayer(args[1]).sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" Your prefix was accepted! Thank you for donating! "+((StringUtils.join(newArgs, " ").equals(""))? "":("Your prefix was accepted"+((StringUtils.join(newArgs," ").equals(""))?"":" becauase: '"+StringUtils.join(newArgs, " ")+"'"+"!"))));
+										Bukkit.getPlayer(args[1]).sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" Your prefix was accepted! Thank you for donating! "+((join(newArgs).equals(""))? "":("Your prefix was accepted"+((join(newArgs).equals(""))?"":" becauase: '"+StringUtils.join(newArgs)+"'"+"!"))));
 										int count = getConfig().getInt("players."+players.get(i)+".prefixrequests");
 										getConfig().set("players."+players.get(i), "");
 										if(count!=1){
@@ -123,7 +122,7 @@ public class CustomPrefix extends JavaPlugin {
 									for(int ii=2;ii<args.length;ii++){
 										newArgs[ii-2]=args[ii];
 									}
-									getConfig().set("players."+players.get(i)+".reason", StringUtils.join(newArgs, " "));
+									getConfig().set("players."+players.get(i)+".reason", join(newArgs));
 									getConfig().set("players."+players.get(i)+".status", "denied");
 									//prefixRequest.setDeniedReason(StringUtils.join(newArgs," "));
 									//prefixRequest.setRequestedPrefix(pending.get(i).getRequestedPrefix());
@@ -185,10 +184,18 @@ public class CustomPrefix extends JavaPlugin {
 	}
 	private String handleColors(String input){
 		if(input!=null){
-			return input.replaceAll("&","§");
+			return input.replaceAll("&","ï¿½");
 		} else {
 			return null;
 		}
+	}
+    private static String join(Object[] in){
+		String output="";
+		for(Object item: in){
+            output+=item.toString()+" ";
+		}
+		output=output.substring(0,output.length()-2);
+		return output;
 	}
 	@SuppressWarnings("deprecation")
 	public static int getCustomDate(){
