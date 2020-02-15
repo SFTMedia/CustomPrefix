@@ -29,7 +29,7 @@ public class CustomPrefix extends JavaPlugin {
 				if(getConfig().getInt("players.time."+((Player)sender).getUniqueId())+getConfig().getInt("delayDays")<=getCustomDate()){
 					//PrefixRequest prefixRequest = new PrefixRequest();
 					//prefixRequest.setPlayername(sender.getName());
-					//prefixRequest.setRequestedPrefix(join(args," "));
+					//prefixRequest.setRequestedPrefix(join(args));
 					List<String> players = (List<String>) getConfig().getList("playerList");
 					if(players==null){
 						players = new ArrayList<String>();
@@ -184,15 +184,15 @@ public class CustomPrefix extends JavaPlugin {
 	}
 	private String handleColors(String input){
 		if(input!=null){
-			return input.replaceAll("&","�");
+			return input.replaceAll("&","§");
 		} else {
 			return null;
 		}
 	}
-    private static String join(Object[] in){
+	private static String join(Object[] in){
 		String output="";
 		for(Object item: in){
-            output+=item.toString()+" ";
+			output+=item.toString()+" ";
 		}
 		output=output.substring(0,output.length()-2);
 		return output;
