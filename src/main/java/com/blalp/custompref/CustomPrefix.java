@@ -52,6 +52,10 @@ public class CustomPrefix extends JavaPlugin {
 			return true;
 		} else if (cmd.getName().equalsIgnoreCase("prefixpending")){//usage: /<command> <accept/reject/get> <playername> <reason>
 			if(sender.hasPermission("customprefix.admin")){
+				if(args.length==0){
+					sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" usage: /"+cmd.getName()+" (get|list|accept|reject)");
+					return false;
+				}
 				if(args.length<2&&!(args[0].equalsIgnoreCase("get")||args[0].equalsIgnoreCase("list"))){
 					sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] "+"Error, please follow this format. /prefixpending get or /prefixpending <accept/reject> <playername> <reason>");
 					return true;
@@ -88,7 +92,7 @@ public class CustomPrefix extends JavaPlugin {
 									sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] You accepted "+args[1]+"'s Request ("+handleColors(getConfig().getString("players."+players.get(i)+".requestedPrefix"))+ChatColor.WHITE+")"+((getConfig().getString("players."+players.get(i)+".reason").equals(""))?"":" because "+getConfig().getString("players."+players.get(i)+".reason")+"!"));
 									if(Bukkit.getPlayer(args[1])!=null){
 										PermissionsEx.getUser(Bukkit.getPlayer(args[1])).setPrefix(getConfig().getString("players."+players.get(i)+".requestedPrefix"), "*");;
-										Bukkit.getPlayer(args[1]).sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" Your prefix was accepted! Thank you for donating! "+((join(newArgs).equals(""))? "":("Your prefix was accepted"+((join(newArgs).equals(""))?"":" becauase: '"+StringUtils.join(newArgs)+"'"+"!"))));
+										Bukkit.getPlayer(args[1]).sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" Your prefix was accepted! Thank you for donating! "+((join(newArgs).equals(""))? "":("Your prefix was accepted"+((join(newArgs).equals(""))?"":" becauase: '"+join(newArgs)+"'"+"!"))));
 										int count = getConfig().getInt("players."+players.get(i)+".prefixrequests");
 										getConfig().set("players."+players.get(i), "");
 										if(count!=1){
@@ -162,6 +166,11 @@ public class CustomPrefix extends JavaPlugin {
 				}
 			}
 		} else if (cmd.getName().equalsIgnoreCase("prefixadmin")){
+			if(args.length!=1){
+				sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" usage: /"+cmd.getName()+" PLAYER_NAME");
+				sender.sendMessage("This will give them the ability to request a prefix.");
+				return false;
+			}
 			if(sender.hasPermission("customprefix.console")){
 				if(getConfig().contains("players."+Bukkit.getOfflinePlayer(args[0]).getUniqueId()+".prefixrequests")){
 					getConfig().set("players."+Bukkit.getOfflinePlayer(args[0]).getUniqueId()+".prefixrequests", getConfig().getInt("players."+Bukkit.getOfflinePlayer(args[0]).getUniqueId()+".prefixrequests")+1);
@@ -206,30 +215,3 @@ public class CustomPrefix extends JavaPlugin {
 		return instance;
 	}
 }
-/*
- * package com.blalp.custompref;
-
-public class PrefixRequest {
-	private String playername = "";
-	private String requestedPrefix ="";
-	private String reason = "";
-	public String getReason() {
-		return reason;
-	}
-	public String getPlayername() {
-		return playername;
-	}
-	public String getRequestedPrefix() {
-		return requestedPrefix;
-	}
-	public void setDeniedReason(String deniedReason) {
-		this.reason = deniedReason;
-	}
-	public void setPlayername(String playername) {
-		this.playername = playername;
-	}
-	public void setRequestedPrefix(String requestedPrefix) {
-		this.requestedPrefix = requestedPrefix;
-	}
-}
-*/

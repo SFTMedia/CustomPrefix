@@ -34,12 +34,23 @@
 		  <id>other-plugins</id>
 		  <url>file://${project.basedir}/libs/other-plugins</url>
 		</repository>
+        <repository>
+           <id>spigot</id>
+           <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
 	</repositories>
 	<dependencies>
 		<dependency>
-			<groupId>org</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>1.7.10</version>
+			<groupId>ru</groupId>
+			<artifactId>tehkode</artifactId>
+			<version>1.22.8</version>
 		</dependency>
+       <dependency>
+           <groupId>org.spigotmc</groupId>
+           <artifactId>spigot-api</artifactId>
+           <version>1.15.1-R0.1-SNAPSHOT</version>
+           <type>jar</type>
+           <scope>provided</scope>
+       </dependency> 
 	</dependencies>
 </project>
