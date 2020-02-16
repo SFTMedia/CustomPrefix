@@ -1,2 +1,6 @@
 libs/
 target/
+.project
+.settings
+.classpath
+.vscode
