@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>ru</groupId>
 			<artifactId>tehkode</artifactId>
-			<version>1.22.8</version>
+			<version>1.23.4</version>
 		</dependency>
        <dependency>
            <groupId>org.spigotmc</groupId>

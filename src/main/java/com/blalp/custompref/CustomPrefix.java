@@ -69,6 +69,10 @@ public class CustomPrefix extends JavaPlugin {
 							}
 						}
 					} else if (args[0].equalsIgnoreCase("accept")||args[0].equalsIgnoreCase("yes")||args[0].equalsIgnoreCase("approve")){
+						if(args.length<2){
+							sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] "+"Usage: /"+cmd.getName()+" accept [name] [reason]");
+							return false;
+						}
 						Boolean found = false;
 						if(players!=null){
 							for(int i=0;i<players.size();i++){
@@ -115,6 +119,10 @@ public class CustomPrefix extends JavaPlugin {
 							sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] "+"No pending requests.");
 						}
 					} else if (args[0].equalsIgnoreCase("reject")||args[0].equalsIgnoreCase("no")||args[0].equalsIgnoreCase("deny")){
+						if(args.length<2){
+							sender.sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"] "+"Usage: /"+cmd.getName()+" reject [name] [reason]");
+							return false;
+						}
 						Boolean found = false;
 						if(players!=null){
 							for(int i=0;i<players.size();i++){
