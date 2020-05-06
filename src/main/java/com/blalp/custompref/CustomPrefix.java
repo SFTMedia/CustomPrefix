@@ -145,7 +145,7 @@ public class CustomPrefix extends JavaPlugin {
 																			"players." + players.get(i) + ".reason")
 																	+ "!"));
 									if (Bukkit.getPlayer(args[1]) != null) {
-										chat.setPlayerSuffix(Bukkit.getPlayer(args[1]), getConfig()
+										chat.setPlayerPrefix(Bukkit.getPlayer(args[1]), getConfig()
 												.getString("players." + players.get(i) + ".requestedPrefix"));
 										;
 										Bukkit.getPlayer(args[1]).sendMessage(ChatColor.WHITE + "[" + ChatColor.BLUE

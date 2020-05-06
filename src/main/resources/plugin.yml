@@ -1,7 +1,7 @@
 name: CustomPrefix
 main: com.blalp.custompref.CustomPrefix
 version: 1.0.2
-depend: [PermissionsEx]
+depend: [Vault]
 
 commands:
   prefix:
