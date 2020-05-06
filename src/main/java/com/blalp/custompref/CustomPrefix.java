@@ -37,6 +37,11 @@ public class CustomPrefix extends JavaPlugin {
 			if (sender instanceof Player && (sender.hasPermission("customprefix.prefix") || (getConfig()
 					.contains("players." + ((Player) sender).getUniqueId() + ".prefixrequests"))
 					&& getConfig().getInt("players." + ((Player) sender).getUniqueId() + ".prefixrequests") > 0)) {
+				if (args.length < 1) {
+					sender.sendMessage(ChatColor.WHITE + "[" + ChatColor.BLUE + "CustomPrefix" + ChatColor.WHITE + "]"
+							+ " usage: /" + cmd.getName() + " [Prefix]");
+					return false;
+				}
 				if (getConfig().getInt("players.time." + ((Player) sender).getUniqueId())
 						+ getConfig().getInt("delayDays") <= getCustomDate()) {
 					// PrefixRequest prefixRequest = new PrefixRequest();
@@ -100,7 +105,7 @@ public class CustomPrefix extends JavaPlugin {
 						}
 					} else if (args[0].equalsIgnoreCase("accept") || args[0].equalsIgnoreCase("yes")
 							|| args[0].equalsIgnoreCase("approve")) {
-						if (args.length < 2) {
+						if (args.length < 3) {
 							sender.sendMessage(ChatColor.WHITE + "[" + ChatColor.BLUE + "CustomPrefix" + ChatColor.WHITE
 									+ "] " + "Usage: /" + cmd.getName() + " accept [name] [reason]");
 							return false;
@@ -145,7 +150,7 @@ public class CustomPrefix extends JavaPlugin {
 																			"players." + players.get(i) + ".reason")
 																	+ "!"));
 									if (Bukkit.getPlayer(args[1]) != null) {
-										chat.setPlayerPrefix(Bukkit.getPlayer(args[1]), getConfig()
+										chat.setPlayerPrefix(null, Bukkit.getPlayer(args[1]), getConfig()
 												.getString("players." + players.get(i) + ".requestedPrefix"));
 										;
 										Bukkit.getPlayer(args[1]).sendMessage(ChatColor.WHITE + "[" + ChatColor.BLUE
@@ -181,7 +186,7 @@ public class CustomPrefix extends JavaPlugin {
 						}
 					} else if (args[0].equalsIgnoreCase("reject") || args[0].equalsIgnoreCase("no")
 							|| args[0].equalsIgnoreCase("deny")) {
-						if (args.length < 2) {
+						if (args.length < 3) {
 							sender.sendMessage(ChatColor.WHITE + "[" + ChatColor.BLUE + "CustomPrefix" + ChatColor.WHITE
 									+ "] " + "Usage: /" + cmd.getName() + " reject [name] [reason]");
 							return false;
@@ -311,7 +316,9 @@ public class CustomPrefix extends JavaPlugin {
 		for (Object item : in) {
 			output += item.toString() + " ";
 		}
-		output = output.substring(0, output.length() - 2);
+		if (output.length() != 0) {
+			output = output.substring(0, output.length() - 1);
+		}
 		return output;
 	}
 
