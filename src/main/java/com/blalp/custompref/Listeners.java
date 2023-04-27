@@ -2,12 +2,13 @@ package com.blalp.custompref;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import ru.tehkode.permissions.bukkit.PermissionsEx;
+import net.milkbowl.vault.chat.Chat;
 
 public class Listeners implements Listener {
 	@SuppressWarnings("unchecked")
@@ -36,7 +37,8 @@ public class Listeners implements Listener {
 						CustomPrefix.getInstance().saveConfig();
 					} else if (CustomPrefix.getInstance().getConfig().getString("players."+players.get(i)+".status").equals("accepted")){
 						event.getPlayer().sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" Your prefix was accepted"+((CustomPrefix.getInstance().getConfig().getString("players."+players.get(i)+".reason").equals(""))?"":" because "+CustomPrefix.getInstance().getConfig().getString("players."+players.get(i)+".reason"))+"! Thank you for donating!");
-						PermissionsEx.getUser(event.getPlayer()).setPrefix(CustomPrefix.getInstance().getConfig().getString("players."+players.get(i)+".requestedPrefix"),"*");
+						Chat chat = Bukkit.getServer().getServicesManager().getRegistration(Chat.class).getProvider();
+						chat.setPlayerPrefix(event.getPlayer(), CustomPrefix.getInstance().getConfig().getString("players."+players.get(i)+".requestedPrefix"));
 						int count = CustomPrefix.getInstance().getConfig().getInt("players."+players.get(i)+".prefixrequests");
 						CustomPrefix.getInstance().getConfig().set("players."+players.get(i), "");
 						if(count!=1){

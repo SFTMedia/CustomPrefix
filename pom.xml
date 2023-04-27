@@ -3,7 +3,7 @@
 
 <groupId>com.blalp</groupId>
 <artifactId>customprefix</artifactId>
-<version>1.0.1</version>
+<version>1.1.0</version>
 <packaging>jar</packaging>
 
 <name>CustomPrefix</name>
@@ -34,21 +34,26 @@
 		  <id>other-plugins</id>
 		  <url>file://${project.basedir}/libs/other-plugins</url>
 		</repository>
+    	<repository>
+          <id>jitpack.io</id>
+          <url>https://jitpack.io</url>
+        </repository>
         <repository>
            <id>spigot</id>
            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
 	</repositories>
 	<dependencies>
-		<dependency>
-			<groupId>ru</groupId>
-			<artifactId>tehkode</artifactId>
-			<version>1.23.4</version>
-		</dependency>
+       <dependency>
+           <groupId>com.github.MilkBowl</groupId>
+           <artifactId>VaultAPI</artifactId>
+           <version>1.7.1</version>
+           <scope>provided</scope>
+       </dependency>
        <dependency>
            <groupId>org.spigotmc</groupId>
            <artifactId>spigot-api</artifactId>
-           <version>1.15.1-R0.1-SNAPSHOT</version>
+           <version>1.16.5-R0.1-SNAPSHOT</version>
            <type>jar</type>
            <scope>provided</scope>
        </dependency> 

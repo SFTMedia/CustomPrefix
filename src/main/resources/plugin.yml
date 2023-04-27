@@ -1,18 +1,15 @@
 name: CustomPrefix
 main: com.blalp.custompref.CustomPrefix
-version: 1.0
-depend: [PermissionsEx]
+version: 1.1
+depend: [Vault]
 
 commands:
   prefix:
    aliases: [pre]
-   usage: /<command> <requested prefix>
    description: Allows players to request a prefix
   prefixpending:
    aliases: [adminpre,adminprefix,adpre,adprefix]
-   usage: /<command> <accept/reject/get> <playername> <reason>
    description: Allows managers to approve prefixes.
   prefixadmin:
    aliases: []
-   usage: /<command> <playername> <prefix>
    description: Allows admins to request prefix for other people.
