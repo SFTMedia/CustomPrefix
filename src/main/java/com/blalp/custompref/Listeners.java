@@ -52,7 +52,7 @@ public class Listeners implements Listener {
 					} else if(CustomPrefix.getInstance().getConfig().getString("players."+players.get(i)+".status").equals("pending")){
 						event.getPlayer().sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" Your prefix is still pending!");
 					} else if(CustomPrefix.getInstance().getConfig().getString("players."+players.get(i)+".status").equals("ready")){
-						event.getPlayer().sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" You can request a prefic with /pre [prefix]! Thank you for donating :)");
+						event.getPlayer().sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" You can request a prefix with /pre [prefix]! Thank you for donating :)");
 					}
 				}
 			}
