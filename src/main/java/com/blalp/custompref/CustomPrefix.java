@@ -122,7 +122,7 @@ public class CustomPrefix extends JavaPlugin {
 										Player player = Bukkit.getPlayer(args[1]);
 										String newPrefix = getConfig().getString("players."+players.get(i)+".requestedPrefix");
 										chat.setPlayerPrefix(player, newPrefix);
-										Bukkit.getPlayer(args[1]).sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" Your prefix was accepted! Thank you for donating! "+((join(newArgs).equals(""))? "":("Your prefix was accepted"+((join(newArgs).equals(""))?"":" becauase: '"+join(newArgs)+"'"+"!"))));
+										Bukkit.getPlayer(args[1]).sendMessage(ChatColor.WHITE+"["+ChatColor.BLUE+"CustomPrefix"+ChatColor.WHITE+"]"+" Your prefix was accepted! Thank you for donating! "+((join(newArgs).equals(""))? "":("Your prefix was accepted"+((join(newArgs).equals(""))?"":" because: '"+join(newArgs)+"'"+"!"))));
 										int count = getConfig().getInt("players."+players.get(i)+".prefixrequests");
 										getConfig().set("players."+players.get(i), "");
 										if(count!=1){
